@@ -31,77 +31,77 @@ const users: Record<string, { password: string; user: User }> = {
       name: "System Administrator",
       role: "Administrator",
       department: "IT Department",
-      badgeId: "ADM-001",
+      badgeId: "ADMIN-001",
     },
   },
-  "officer@police.gov": {
+  "john.detective@police.gov": {
     password: "police123",
     user: {
-      email: "officer@police.gov",
-      name: "John Smith",
+      email: "john.detective@police.gov",
+      name: "Detective John Smith",
       role: "Police Officer",
-      department: "Metropolitan Police",
-      badgeId: "P-2345",
+      department: "Homicide Division",
+      badgeId: "PO-1234",
     },
   },
-  "forensics@lab.gov": {
+  "sarah.officer@police.gov": {
+    password: "police123",
+    user: {
+      email: "sarah.officer@police.gov",
+      name: "Officer Sarah Johnson",
+      role: "Police Officer",
+      department: "Narcotics Unit",
+      badgeId: "PO-5678",
+    },
+  },
+  "mike.forensics@lab.gov": {
     password: "forensics123",
     user: {
-      email: "forensics@lab.gov",
-      name: "Dr. Sarah Johnson",
+      email: "mike.forensics@lab.gov",
+      name: "Dr. Michael Chen",
       role: "Forensics Specialist",
-      department: "Digital Forensics Lab",
-      badgeId: "FS-0791",
+      department: "Crime Lab",
+      badgeId: "FS-9012",
     },
   },
-  "prosecutor@da.gov": {
+  "emily.analyst@lab.gov": {
+    password: "forensics123",
+    user: {
+      email: "emily.analyst@lab.gov",
+      name: "Emily Rodriguez",
+      role: "Forensics Specialist",
+      department: "Digital Forensics",
+      badgeId: "FS-3456",
+    },
+  },
+  "david.prosecutor@da.gov": {
     password: "prosecutor123",
     user: {
-      email: "prosecutor@da.gov",
-      name: "Michael Brown",
+      email: "david.prosecutor@da.gov",
+      name: "David Thompson",
       role: "Prosecutor",
-      department: "District Attorney Office",
-      badgeId: "DA-8795",
+      department: "District Attorney",
+      badgeId: "DA-7890",
     },
   },
-  "detective@police.gov": {
-    password: "detective123",
+  "lisa.ada@da.gov": {
+    password: "prosecutor123",
     user: {
-      email: "detective@police.gov",
-      name: "Emily Davis",
-      role: "Police Officer",
-      department: "Metropolitan Police",
-      badgeId: "D-3421",
-    },
-  },
-  "forensics2@lab.gov": {
-    password: "forensics2123",
-    user: {
-      email: "forensics2@lab.gov",
-      name: "Dr. Robert Chen",
-      role: "Forensics Specialist",
-      department: "Digital Forensics Lab",
-      badgeId: "FS-1123",
-    },
-  },
-  "prosecutor2@da.gov": {
-    password: "prosecutor2123",
-    user: {
-      email: "prosecutor2@da.gov",
-      name: "Jessica Martinez",
+      email: "lisa.ada@da.gov",
+      name: "Lisa Martinez",
       role: "Prosecutor",
-      department: "District Attorney Office",
-      badgeId: "DA-9234",
+      department: "Assistant DA",
+      badgeId: "ADA-2345",
     },
   },
-  "officer2@police.gov": {
-    password: "officer2123",
+  "robert.senior@da.gov": {
+    password: "prosecutor123",
     user: {
-      email: "officer2@police.gov",
-      name: "David Wilson",
-      role: "Police Officer",
-      department: "Metropolitan Police",
-      badgeId: "P-5678",
+      email: "robert.senior@da.gov",
+      name: "Robert Williams",
+      role: "Prosecutor",
+      department: "Senior Counsel",
+      badgeId: "SC-6789",
     },
   },
 };

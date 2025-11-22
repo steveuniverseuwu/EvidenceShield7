@@ -1032,100 +1032,149 @@ app.get("/make-server-af0976da/get-users", async (c: any) => {
   }
 });
 
+// Demo users list (shared for consistency)
+const DEMO_USERS = [
+  {
+    email: "admin@evidenceshield.gov",
+    name: "System Administrator",
+    role: "Administrator",
+    department: "IT Department",
+    badgeId: "ADMIN-001",
+    password: "admin123",
+    status: "active",
+    isDemo: true,
+  },
+  {
+    email: "john.detective@police.gov",
+    name: "Detective John Smith",
+    role: "Police Officer",
+    department: "Homicide Division",
+    badgeId: "PO-1234",
+    password: "police123",
+    status: "active",
+    isDemo: true,
+  },
+  {
+    email: "sarah.officer@police.gov",
+    name: "Officer Sarah Johnson",
+    role: "Police Officer",
+    department: "Narcotics Unit",
+    badgeId: "PO-5678",
+    password: "police123",
+    status: "active",
+    isDemo: true,
+  },
+  {
+    email: "mike.forensics@lab.gov",
+    name: "Dr. Michael Chen",
+    role: "Forensics Specialist",
+    department: "Crime Lab",
+    badgeId: "FS-9012",
+    password: "forensics123",
+    status: "active",
+    isDemo: true,
+  },
+  {
+    email: "emily.analyst@lab.gov",
+    name: "Emily Rodriguez",
+    role: "Forensics Specialist",
+    department: "Digital Forensics",
+    badgeId: "FS-3456",
+    password: "forensics123",
+    status: "active",
+    isDemo: true,
+  },
+  {
+    email: "david.prosecutor@da.gov",
+    name: "David Thompson",
+    role: "Prosecutor",
+    department: "District Attorney",
+    badgeId: "DA-7890",
+    password: "prosecutor123",
+    status: "active",
+    isDemo: true,
+  },
+  {
+    email: "lisa.ada@da.gov",
+    name: "Lisa Martinez",
+    role: "Prosecutor",
+    department: "Assistant DA",
+    badgeId: "ADA-2345",
+    password: "prosecutor123",
+    status: "active",
+    isDemo: true,
+  },
+  {
+    email: "robert.senior@da.gov",
+    name: "Robert Williams",
+    role: "Prosecutor",
+    department: "Senior Counsel",
+    badgeId: "SC-6789",
+    password: "prosecutor123",
+    status: "active",
+    isDemo: true,
+  },
+];
+
 // Initialize demo users
 app.post("/make-server-af0976da/init-users", async (c: any) => {
   try {
     console.log("👥 Initializing demo users...");
 
-    const demoUsers = [
-      {
-        email: "admin@evidenceshield.gov",
-        name: "System Administrator",
-        role: "Administrator",
-        department: "IT Department",
-        badgeId: "ADMIN-001",
-        password: "admin123",
-        status: "active",
-      },
-      {
-        email: "john.detective@police.gov",
-        name: "Detective John Smith",
-        role: "Police Officer",
-        department: "Homicide Division",
-        badgeId: "PO-1234",
-        password: "police123",
-        status: "active",
-      },
-      {
-        email: "sarah.officer@police.gov",
-        name: "Officer Sarah Johnson",
-        role: "Police Officer",
-        department: "Narcotics Unit",
-        badgeId: "PO-5678",
-        password: "police123",
-        status: "active",
-      },
-      {
-        email: "mike.forensics@lab.gov",
-        name: "Dr. Michael Chen",
-        role: "Forensics Specialist",
-        department: "Crime Lab",
-        badgeId: "FS-9012",
-        password: "forensics123",
-        status: "active",
-      },
-      {
-        email: "emily.analyst@lab.gov",
-        name: "Emily Rodriguez",
-        role: "Forensics Specialist",
-        department: "Digital Forensics",
-        badgeId: "FS-3456",
-        password: "forensics123",
-        status: "active",
-      },
-      {
-        email: "david.prosecutor@da.gov",
-        name: "David Thompson",
-        role: "Prosecutor",
-        department: "District Attorney",
-        badgeId: "DA-7890",
-        password: "prosecutor123",
-        status: "active",
-      },
-      {
-        email: "lisa.ada@da.gov",
-        name: "Lisa Martinez",
-        role: "Prosecutor",
-        department: "Assistant DA",
-        badgeId: "ADA-2345",
-        password: "prosecutor123",
-        status: "active",
-      },
-      {
-        email: "robert.senior@da.gov",
-        name: "Robert Williams",
-        role: "Prosecutor",
-        department: "Senior Counsel",
-        badgeId: "SC-6789",
-        password: "prosecutor123",
-        status: "active",
-      },
-    ];
-
     // Store each user
-    for (const user of demoUsers) {
+    for (const user of DEMO_USERS) {
       await kv.set(`user:${user.email}`, user);
     }
 
-    console.log(`✅ Initialized ${demoUsers.length} demo users`);
+    console.log(`✅ Initialized ${DEMO_USERS.length} demo users`);
 
     return c.json({
       success: true,
-      count: demoUsers.length,
-      message: `${demoUsers.length} demo users initialized`,
+      count: DEMO_USERS.length,
+      message: `${DEMO_USERS.length} demo users initialized`,
     });
   } catch (error: any) {
     console.error("❌ Error initializing users:", error);
+    return c.json({ error: error.message }, 500);
+  }
+});
+
+// Reset demo users to active status (called on page load to restore demo accounts)
+app.post("/make-server-af0976da/reset-demo-users", async (c: any) => {
+  try {
+    console.log("🔄 Resetting demo users to active status...");
+
+    let resetCount = 0;
+    
+    // Reset all demo users to active
+    for (const demoUser of DEMO_USERS) {
+      const existingUser = await kv.get(`user:${demoUser.email}`);
+      
+      if (existingUser) {
+        // If user was deactivated or modified, reset to original demo state
+        if (existingUser.status === "deactivated" || !existingUser.isDemo) {
+          await kv.set(`user:${demoUser.email}`, demoUser);
+          resetCount++;
+          console.log(`   ✅ Reset demo user: ${demoUser.name}`);
+        }
+      } else {
+        // If demo user doesn't exist, create it
+        await kv.set(`user:${demoUser.email}`, demoUser);
+        resetCount++;
+        console.log(`   ✅ Created missing demo user: ${demoUser.name}`);
+      }
+    }
+
+    console.log(`✅ Reset complete: ${resetCount} demo users restored`);
+
+    return c.json({
+      success: true,
+      resetCount,
+      totalDemoUsers: DEMO_USERS.length,
+      message: `${resetCount} demo users reset to active status`,
+    });
+  } catch (error: any) {
+    console.error("❌ Error resetting demo users:", error);
     return c.json({ error: error.message }, 500);
   }
 });
@@ -1143,9 +1192,9 @@ app.post("/make-server-af0976da/create-user", async (c: any) => {
 
     console.log("👤 Creating user:", email);
 
-    // Check if user already exists
+    // Check if user already exists AND is active
     const existingUser = await kv.get(`user:${email}`);
-    if (existingUser) {
+    if (existingUser && existingUser.status === "active") {
       return c.json({ error: "User already exists" }, 400);
     }
 
@@ -1157,6 +1206,7 @@ app.post("/make-server-af0976da/create-user", async (c: any) => {
       badgeId,
       password,
       status: "active",
+      isDemo: false, // Mark as non-demo user
       createdBy,
       createdAt: new Date().toISOString(),
     };
@@ -1238,6 +1288,9 @@ app.post("/make-server-af0976da/deactivate-user", async (c: any) => {
       return c.json({ error: "User not found" }, 404);
     }
 
+    // Check if this is a demo user
+    const isDemoUser = existingUser.isDemo === true;
+
     // Update user status to deactivated
     const deactivatedUser = {
       ...existingUser,
@@ -1248,11 +1301,12 @@ app.post("/make-server-af0976da/deactivate-user", async (c: any) => {
 
     await kv.set(`user:${email}`, deactivatedUser);
 
-    console.log("✅ User deactivated successfully");
+    console.log(`✅ User deactivated successfully${isDemoUser ? " (Demo user - will be restored on page refresh)" : ""}`);
 
     return c.json({
       success: true,
       message: "User deactivated successfully",
+      isDemo: isDemoUser,
     });
   } catch (error: any) {
     console.error("❌ Error deactivating user:", error);

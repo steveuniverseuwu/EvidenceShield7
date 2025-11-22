@@ -14,12 +14,12 @@ This document contains all demo login credentials for testing the ChainGuard sys
 
 ---
 
-### 2. Police Officer (John Smith)
-- **Email:** `officer@police.gov`
+### 2. Police Officer (Detective John Smith)
+- **Email:** `john.detective@police.gov`
 - **Password:** `police123`
-- **Badge ID:** P-2345
-- **Name:** John Smith
-- **Department:** Metropolitan Police
+- **Badge ID:** PO-1234
+- **Name:** Detective John Smith
+- **Department:** Homicide Division
 - **Permissions:** Upload files to IPFS, share evidence to Forensics
 
 ---

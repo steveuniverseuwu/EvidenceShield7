@@ -196,8 +196,8 @@ export function UserTable({ currentUser }: UserTableProps) {
   };
 
   useEffect(() => {
-    // Test backend connectivity first
-    const testBackend = async () => {
+    // Test backend connectivity first and reset demo users
+    const initBackend = async () => {
       try {
         // Test health endpoint
         const healthCheck = await fetch(
@@ -222,12 +222,30 @@ export function UserTable({ currentUser }: UserTableProps) {
         );
         const kvResult = await kvTest.json();
         console.log("✅ KV Store test:", kvResult);
+        
+        // Reset demo users to active status (restores deactivated demo accounts)
+        console.log("🔄 Resetting demo users...");
+        const resetResponse = await fetch(
+          `https://${projectId}.supabase.co/functions/v1/make-server-af0976da/reset-demo-users`,
+          {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${publicAnonKey}`,
+            },
+          }
+        );
+        const resetResult = await resetResponse.json();
+        console.log("✅ Demo users reset:", resetResult);
+        
+        if (resetResult.resetCount > 0) {
+          console.log(`   🔄 Restored ${resetResult.resetCount} demo user(s) to active status`);
+        }
       } catch (err) {
         console.error("❌ Backend/KV test failed:", err);
       }
     };
     
-    testBackend();
+    initBackend();
     fetchUsers();
   }, []);
 
@@ -345,12 +363,17 @@ export function UserTable({ currentUser }: UserTableProps) {
         throw new Error(data.error || "Failed to deactivate user");
       }
 
-      setSuccess("User deactivated successfully!");
+      // Check if this is a demo user
+      const successMessage = data.isDemo 
+        ? "Demo user deactivated successfully! (Will be restored on page refresh)"
+        : "User deactivated successfully!";
+
+      setSuccess(successMessage);
       setShowDeactivateDialog(false);
       setSelectedUser(null);
       fetchUsers();
 
-      setTimeout(() => setSuccess(null), 3000);
+      setTimeout(() => setSuccess(null), 5000);
     } catch (err: any) {
       setError(err.message);
     }
