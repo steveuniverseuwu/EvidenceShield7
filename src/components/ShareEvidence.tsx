@@ -34,14 +34,15 @@ export function ShareEvidence({ currentUser }: ShareEvidenceProps) {
   const getRecipientOptions = () => {
     if (currentUser.role === "Police Officer") {
       return [
-        { email: "forensics@lab.gov", name: "Dr. Sarah Johnson (Forensics)" },
-        { email: "forensics2@lab.gov", name: "Dr. Robert Chen (Forensics)" },
+        { email: "mike.forensics@lab.gov", name: "Dr. Michael Chen (Forensics)" },
+        { email: "emily.analyst@lab.gov", name: "Emily Rodriguez (Forensics)" },
       ];
     }
     if (currentUser.role === "Forensics Specialist") {
       return [
-        { email: "prosecutor@da.gov", name: "Michael Brown (Prosecutor)" },
-        { email: "prosecutor2@da.gov", name: "Jessica Martinez (Prosecutor)" },
+        { email: "david.prosecutor@da.gov", name: "David Thompson (Prosecutor)" },
+        { email: "lisa.ada@da.gov", name: "Lisa Martinez (Prosecutor)" },
+        { email: "robert.senior@da.gov", name: "Robert Williams (Prosecutor)" },
       ];
     }
     return [];

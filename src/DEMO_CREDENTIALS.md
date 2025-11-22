@@ -7,7 +7,7 @@ This document contains all demo login credentials for testing the ChainGuard sys
 ### 1. Administrator
 - **Email:** `admin@evidenceshield.gov`
 - **Password:** `admin123`
-- **Badge ID:** ADM-001
+- **Badge ID:** ADMIN-001
 - **Name:** System Administrator
 - **Department:** IT Department
 - **Permissions:** Can only manage users (create, edit, deactivate)
@@ -24,63 +24,63 @@ This document contains all demo login credentials for testing the ChainGuard sys
 
 ---
 
-### 3. Forensics Specialist (Dr. Sarah Johnson)
-- **Email:** `forensics@lab.gov`
+### 3. Police Officer (Officer Sarah Johnson)
+- **Email:** `sarah.officer@police.gov`
+- **Password:** `police123`
+- **Badge ID:** PO-5678
+- **Name:** Officer Sarah Johnson
+- **Department:** Narcotics Unit
+- **Permissions:** Upload files to IPFS, share evidence to Forensics
+
+---
+
+### 4. Forensics Specialist (Dr. Michael Chen)
+- **Email:** `mike.forensics@lab.gov`
 - **Password:** `forensics123`
-- **Badge ID:** FS-0791
-- **Name:** Dr. Sarah Johnson
-- **Department:** Digital Forensics Lab
+- **Badge ID:** FS-9012
+- **Name:** Dr. Michael Chen
+- **Department:** Crime Lab
 - **Permissions:** Upload files to IPFS, share evidence to Prosecutors
 
 ---
 
-### 4. Prosecutor (Michael Brown)
-- **Email:** `prosecutor@da.gov`
+### 5. Forensics Specialist (Emily Rodriguez)
+- **Email:** `emily.analyst@lab.gov`
+- **Password:** `forensics123`
+- **Badge ID:** FS-3456
+- **Name:** Emily Rodriguez
+- **Department:** Digital Forensics
+- **Permissions:** Upload files to IPFS, share evidence to Prosecutors
+
+---
+
+### 6. Prosecutor (David Thompson)
+- **Email:** `david.prosecutor@da.gov`
 - **Password:** `prosecutor123`
-- **Badge ID:** DA-8795
-- **Name:** Michael Brown
-- **Department:** District Attorney Office
+- **Badge ID:** DA-7890
+- **Name:** David Thompson
+- **Department:** District Attorney
 - **Permissions:** Verify and download files only
 
 ---
 
-### 5. Police Officer/Detective (Emily Davis)
-- **Email:** `detective@police.gov`
-- **Password:** `detective123`
-- **Badge ID:** D-3421
-- **Name:** Emily Davis
-- **Department:** Metropolitan Police
-- **Permissions:** Upload files to IPFS, share evidence to Forensics
-
----
-
-### 6. Forensics Specialist (Dr. Robert Chen)
-- **Email:** `forensics2@lab.gov`
-- **Password:** `forensics2123`
-- **Badge ID:** FS-1123
-- **Name:** Dr. Robert Chen
-- **Department:** Digital Forensics Lab
-- **Permissions:** Upload files to IPFS, share evidence to Prosecutors
-
----
-
-### 7. Prosecutor (Jessica Martinez)
-- **Email:** `prosecutor2@da.gov`
-- **Password:** `prosecutor2123`
-- **Badge ID:** DA-9234
-- **Name:** Jessica Martinez
-- **Department:** District Attorney Office
+### 7. Prosecutor (Lisa Martinez)
+- **Email:** `lisa.ada@da.gov`
+- **Password:** `prosecutor123`
+- **Badge ID:** ADA-2345
+- **Name:** Lisa Martinez
+- **Department:** Assistant DA
 - **Permissions:** Verify and download files only
 
 ---
 
-### 8. Police Officer (David Wilson)
-- **Email:** `officer2@police.gov`
-- **Password:** `officer2123`
-- **Badge ID:** P-5678
-- **Name:** David Wilson
-- **Department:** Metropolitan Police
-- **Permissions:** Upload files to IPFS, share evidence to Forensics
+### 8. Prosecutor (Robert Williams)
+- **Email:** `robert.senior@da.gov`
+- **Password:** `prosecutor123`
+- **Badge ID:** SC-6789
+- **Name:** Robert Williams
+- **Department:** Senior Counsel
+- **Permissions:** Verify and download files only
 
 ---
 
